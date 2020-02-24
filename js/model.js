@@ -1,8 +1,31 @@
 const btn_ricerca = document.getElementById('btn_ricerca');
+const btn_delete = document.getElementById('btn_delete');
+const container = document.getElementById('card-container');
 
 btn_ricerca.onclick = function(){
+    const p = 1;
     const query = document.getElementById("search").value;
-    searchAPI(query);
+    searchAPI(query, p);
+
+    for(i=2; i<10; i++){
+        if (container.hasChildNodes()) {
+            console.log("Prova");
+            const p = i;
+            searchAPI(query, p);
+        }
+    }
+
+    btn_delete.style.cssText = 'display: inline-block;';
+}
+
+btn_delete.onclick = function(){
+    btn_delete.style.cssText = 'display: none;';
+    document.getElementById('search').value = "";
+    document.getElementById('search').select();
+
+    while(container.hasChildNodes()) {
+        container.removeChild(container.lastChild);
+    }
 }
 
 class Movie{
@@ -36,7 +59,7 @@ class Movie{
     }
 }
 
-function searchAPI(query){
+function searchAPI(query, p){
     const baseURL = 'http://www.omdbapi.com/?';
     const apiKey = '2e7fd0e1';
     const aDisplayMovies = [];
@@ -44,16 +67,15 @@ function searchAPI(query){
     //const completeURL = baseURL + 'apikey=' + apiKey + '&s=' + query + '&type=movie' + '&page=' + page;
     //const completeURL = ${baseURL}apikey=${apiKey}&s=${query}; -> literals
 
-    for(let p=1; p<2; p++){
-        const completeURL = baseURL + 'apikey=' + apiKey + '&s=' + query + '&type=movie' + '&page=' + p;
-        fetch(completeURL)
-        .then(response => response.json())
-        .then((response) => {
+    const completeURL = baseURL + 'apikey=' + apiKey + '&s=' + query + '&type=movie' + '&page=' + p;
+    fetch(completeURL)
+    .then(response => response.json())
+    .then((response) => {
         if(response.Response == 'False'){
-            console.log("Errore");
+                console.log("Errore");
         }
         else{
-            const arrMovie = response.Search;
+        const arrMovie = response.Search;
             console.log(arrMovie);
             for(let i=0; i<arrMovie.length; i++){
             const element = arrMovie[i];
@@ -62,13 +84,11 @@ function searchAPI(query){
             if(film.validate()){
                 aDisplayMovies.push(film);
             }
-            //aDisplayMovies.push(film);
         }
         getMovies(aDisplayMovies);
         //forEach(...)   
         }    
     })
-    }
 }
 
 function getMovies(aDisplayMovies){
@@ -101,8 +121,8 @@ function getMovies(aDisplayMovies){
 
         document.getElementById('card-container').replaceWith(cardContainer);
 
-        img.onclick = function(){
-            //Dettagli film ...
+        card.onclick = function(){
+            console.log("Dettagli...");
         } 
     }
 }
