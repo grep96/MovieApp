@@ -1,7 +1,12 @@
 const btn_ricerca = document.getElementById('btn_ricerca');
 //const btn_delete = document.getElementById('btn_delete');
+const btn_Attore = document.getElementById('btn_Attore');
+const btn_Genere = document.getElementById('btn_Genere');
+const btn_Regista = document.getElementById('btn_Regista');
+const btn_preferiti = document.getElementById('btn_preferiti');
 const container = document.getElementById('card-container');
 const pageTitle = document.getElementById('pageTitle');
+const searchBar = document.getElementById('search');
 
 btn_ricerca.onclick = function(){
     const p = 1;
@@ -17,6 +22,20 @@ btn_ricerca.onclick = function(){
 
     //btn_delete.style.cssText = 'display: inline-block;';
 }
+
+btn_Attore.onclick = function(){
+    searchBar.placeholder ='Cerca per attore...';
+}
+
+btn_Genere.onclick = function(){
+    searchBar.placeholder ='Cerca per genere...';
+}
+
+btn_Regista.onclick = function(){
+    searchBar.placeholder ='Cerca per regista...';
+}
+
+
 
 /*btn_delete.onclick = function(){
     btn_delete.style.cssText = 'display: none;';
@@ -155,6 +174,14 @@ function displayDetails(card, img, title, year){
         modalContent.className = 'modal-content';
         modalContent.style.cssText = 'height: 650px;';
 
+        //Preferiti
+        let preferiti = document.createElement('i');
+        preferiti.className = 'fa fa-heart';
+        preferiti.style.cssText = 'color: fuchsia; cursor: pointer; font-size: 20px; padding: 1px; position: fixed; margin-top: 0%; margin-left: 53.8%;';
+        preferiti.onclick = function(){
+            alert("Hai aggiunto " + title + " ai preferiti!");
+        }
+
         //Body
         let modalBody = document.createElement('div');
         modalBody.className = 'modal-body';
@@ -203,6 +230,7 @@ function displayDetails(card, img, title, year){
         //modalContent.appendChild(modalHeader);
         //modalHeader.appendChild(close);
         modalContent.appendChild(modalBody);
+        modalContent.appendChild(preferiti);
         modalBody.appendChild(close);
         modalBody.appendChild(modalContainer);
 

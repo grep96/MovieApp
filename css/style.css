@@ -16,12 +16,28 @@ body{
     outline: none;
     width: 85.5%;
 }
+.fa-filter{
+    color: white;
+    cursor: pointer;
+    font-size: 25px;
+    position: absolute;
+    margin-top: 8%;
+    margin-left: -5%;
+}
 .fa-search{
     color: black;
     cursor: pointer;
     position: absolute;
     margin-top: -3.5%;
     margin-left: 94%;
+}
+.fa-star{
+    color: yellow;
+    cursor: pointer;
+    font-size: 30px;
+    margin-top: -14%;
+    margin-left: 81%;
+    position: absolute;
 }
 .fa-times{
     color: black;
@@ -46,4 +62,17 @@ body{
 }
 .card-body{
     padding: 0.3%;
+}
+.testoFiltri{
+    color: white;
+    font-size: 15px;
+    margin-top: 8.5%;
+    margin-left: 4%;
+}
+.dropdown{
+    margin-left: -7%;
+    margin-top: -13%;
+}
+.dropdown-toggle::after{
+    margin-left: 0;
 }
